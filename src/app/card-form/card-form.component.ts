@@ -1,0 +1,32 @@
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { DateFormControl } from '../date-form-control';
+import { CardNumberControl } from '../card-number-control';
+@Component({
+  selector: 'app-card-form',
+  templateUrl: './card-form.component.html',
+  styleUrls: ['./card-form.component.css']
+})
+export class CardFormComponent implements OnInit {
+  cardForm = new FormGroup({
+    name: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    cardNumber: new CardNumberControl('', [Validators.required, Validators.minLength(19), Validators.maxLength(19)]),
+    expiration: new DateFormControl('', [
+      Validators.required,
+      Validators.pattern(/^(0[1-9]|1[0-2])\/(0[1-9]|1[0-9]|2[1-9]|3[0-1])$/)
+  ]),
+    securityCode: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(3)])
+  });
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
+  onSubmit(): void {
+    console.log(this.cardForm);
+  }
+  onReset(): void {
+    this.cardForm.reset();
+  }
+
+}

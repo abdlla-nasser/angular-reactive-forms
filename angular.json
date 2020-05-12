@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "creditcard-forms"
+    }
+  },
+  "defaultProject": "creditcard-forms",
+  "cli": {
+    "analytics": false
+  }
 }

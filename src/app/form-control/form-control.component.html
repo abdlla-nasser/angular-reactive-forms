@@ -1,0 +1,23 @@
+<div class="field">
+    <label class="label">{{ label }}</label>
+    <div class="control" [ngClass]="{'has-icons-left': icon, 'has-icons-right': !control.pristine}">
+        <input class="input" [ngClass]="{'is-danger': state(), 'is-success': !control.pristine && control.valid}" [formControl]="control" />
+        <span  *ngIf="icon" class="icon is-small is-left">
+            <i [class]="'fas fa-'+ icon"></i>
+        </span>
+        <span *ngIf="!control.pristine && control.valid" class="icon is-small is-right">
+            <i class="fas fa-check"></i>
+        </span>
+        <span *ngIf="!control.pristine && control.invalid" class="icon is-small is-right">
+            <i class="fas fa-exclamation-triangle"></i>
+        </span>
+    </div>
+    <ng-container *ngIf="state()">
+        <ng-container *ngIf="control.errors.required && control.errors.required !== null">
+            <p class="help is-danger">value is required</p>
+        </ng-container>
+        <div *ngIf="control.errors.minlength && control.errors.minlength !== null">
+            <p class="help is-danger">value must be at least {{ control.errors.minlength.requiredLength}} characters</p>
+        </div>
+    </ng-container>
+</div>

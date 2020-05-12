@@ -1,0 +1,32 @@
+<div class="columns">
+    <div class="column edit">
+        <app-card
+            [name]="cardForm.get('name').value"
+            [cardNumber]="cardForm.get('cardNumber').value"
+            [expiration]="cardForm.get('expiration').value">
+        </app-card>
+    </div>
+    <div class="column card">
+        <form [formGroup]="cardForm" (ngSubmit)="onSubmit()">
+            <app-form-control [control]="cardForm.get('name')" label="Name" icon="user"></app-form-control>
+            <app-form-control [control]="cardForm.get('cardNumber')" label="Card Number" icon="credit-card"></app-form-control>
+            <div class="columns">
+                <div class="column">
+                    <app-form-control [control]="cardForm.get('expiration')" label="Expiration (MM/YY)"></app-form-control>
+                </div>
+                <div class="column">
+                    <app-form-control [control]="cardForm.get('securityCode')" label="Security Code"></app-form-control>
+                </div>
+            </div>
+            <div class="control">
+                <div class="buttons is-right">
+                    <button [disabled]="cardForm.invalid" class="button is-link is-rounded" type="submit">Submit</button>
+                    <button class="button is-danger is-rounded" type="button" (click)="onReset()">Reset Form</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<hr />
+<div>Form value is {{ cardForm.value | json }}</div>
+<div>Form valid {{ cardForm.valid }}</div>
